@@ -48,22 +48,22 @@ class JSuggestags {
         this.name = null;
         this.defaultLabel = 'Enter tags';
         this.classes = {
-            sTagsArea: 'jstags-suggestags-area',
-            inputArea: 'jstags-suggestags-input-area',
-            inputAreaDef: 'jstags-suggestags-input-area-default',
-            focus: 'jstags-focus',
-            sTagsInput: 'jstags-suggestags-input',
-            listArea: 'jstags-suggestags-list',
-            list: 'jstags-list',
-            listItem: 'jstags-list-item',
-            itemPad: 'jstags-item-pad',
-            inputType: 'jstags-select-input',
-            tagItem: 'jstags-select-tag',
-            plusItem: 'jstags-plus-tag',
+            sTagsArea: 'j-suggestags-suggestags-area',
+            inputArea: 'j-suggestags-suggestags-input-area',
+            inputAreaDef: 'j-suggestags-suggestags-input-area-default',
+            focus: 'j-suggestags-focus',
+            sTagsInput: 'j-suggestags-suggestags-input',
+            listArea: 'j-suggestags-suggestags-list',
+            list: 'j-suggestags-list',
+            listItem: 'j-suggestags-list-item',
+            itemPad: 'j-suggestags-item-pad',
+            inputType: 'j-suggestags-select-input',
+            tagItem: 'j-suggestags-select-tag',
+            plusItem: 'j-suggestags-plus-tag',
             colBg: 'col-bg',
-            removeTag: 'jstags-remove-tag',
+            removeTag: 'j-suggestags-remove-tag',
             readyToRemove: 'ready-to-remove',
-            noSuggestion: 'jstags-no-suggestion',
+            noSuggestion: 'j-suggestags-no-suggestion',
             showPlusBg: 'show-plus-bg',
         };
         this.selectors = {
@@ -100,8 +100,8 @@ class JSuggestags {
     _init() {
         if (this.checkMethod()) {
             this.name = this.selector.getAttribute('name') ?
-                `${this.selector.getAttribute('name')}_jstags` :
-                'jstags_suggestags';
+                `${this.selector.getAttribute('name')}_j-suggestags` :
+                'j-suggestags_suggestags';
             this.createHTML();
             this.setEvents();
             this.selector.style.display = 'none';
@@ -732,7 +732,7 @@ class JSuggestags {
     }
 
     fixCSS() {
-        if (this.settings.type === 'jstags') {
+        if (this.settings.type === 'j-suggestags') {
             this.selectors.inputArea.classList.add(this.classes.inputAreaDef);
             this.selectors.inputArea.style.padding = '5px 5px';
         } else if (this.settings.type === 'materialize') {
