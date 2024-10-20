@@ -5,7 +5,7 @@ JSuggestags is a **vanilla JavaScript** plugin for input tags with auto-complete
 based on the jQuery plugin by [Amsify42](https://github.com/amsify42) **jquery.amsify.suggestags**
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input');
 jSuggestags._init();
 ```
@@ -16,14 +16,14 @@ Installation
 
 Include the ```JSuggestags``` script in your project:
 
-```
+```html
 <script src="path/to/jsuggestags.js"></script>
 ```
 
 
 Or, if using modules:
 
-```
+```javascript
 import JSuggestags from 'path/to/jsuggestags.js';
 ```
 
@@ -68,14 +68,14 @@ For simple initialization:
 
 
 
-```
+```html
 <input type="text" class="form-control" name="country"/>
 ```
 
 
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="country"]');
 jSuggestags._init();
 ```
@@ -90,14 +90,14 @@ If the input already has a value separated by commas, it will load the tags by d
 
 
 
-```
+```html
 <input type="text" class="form-control" name="country" value="India,UAE,Nepal"/>
 ```
 
 
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="country"]'); jSuggestags._init();
 ```
 
@@ -111,14 +111,14 @@ A list of values can be passed to get suggestions.
 
 
 
-```
+```html
 <input type="text" class="form-control" name="country"/>
 ```
 
 
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="country"]');
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh']
@@ -131,14 +131,14 @@ A list of objects can also be set to have tag/value pairs.
 
 
 
-```
+```html
 <input type="text" class="form-control" name="color"/>
 ```
 
 
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="color"]');
 jSuggestags._settings({
     suggestions: [{
@@ -168,7 +168,7 @@ jSuggestags._init();
 The input will store ```value``` separated by commas like this:
 
 
-```
+```html
 <input type="text" class="form-control" name="color" value="1,2,3,4,5,6"/>
 ```
 
@@ -184,14 +184,14 @@ You can also get suggestions through Ajax.
 
 
 
-```
+```html
 <input type="text" class="form-control" name="country"/>
 ```
 
 
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="country"]');
 jSuggestags._settings({
     suggestionsAction: {
@@ -207,7 +207,7 @@ The Ajax method type will be **GET** by default. The request data you will recei
 
 
 
-```
+```json
 {
     "existingTags": ["tag1", "tag2"],
     "existing": ["suggestion1", "suggestion2"],
@@ -225,7 +225,7 @@ The success response should at least contain a **suggestions** key, and its valu
 
 
 
-```
+```json
 {
     "suggestions": ["newSuggestion1", "newSuggestion2", "newSuggestion3"]
 }
@@ -236,7 +236,7 @@ You can also add these settings and callbacks to this option:
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestionsAction: {
         timeout: -1,
@@ -282,14 +282,14 @@ This option does not allow any inputs other than from suggestions.
 
 
 
-```
+```html
 <input type="text" class="form-control" name="country"/>
 ```
 
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh'],
     whiteList: true
@@ -307,7 +307,7 @@ For setting a default class for tags, you can pass this setting:
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh'],
     whiteList: true,
@@ -321,7 +321,7 @@ You can pass a list of classes, colors, or backgrounds through settings:
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh'],
     whiteList: true,
@@ -335,7 +335,7 @@ Each class will apply to each suggestion tag through their corresponding keys. Y
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh'],
     whiteList: true,
@@ -350,7 +350,7 @@ You can also set class, color, and background for each suggestion item if the su
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: [{
         tag: 'Black',
@@ -393,7 +393,7 @@ The same suggestions can also be passed in the Ajax response to get these stylin
 
 
 
-```
+```json
 {
     "suggestions": [{
         "tag": "Black",
@@ -419,7 +419,7 @@ You can set callbacks on add/remove tag elements.
 
 
 
-```
+```javascript
 jSuggestags._settings({
     afterAdd: function(value) {
         console.info('Tag added:', value);
@@ -436,7 +436,7 @@ Or you can subscribe to custom events.
 
 
 
-```
+```javascript
 const inputElement = document.querySelector('input[name="country"]');
 inputElement.addEventListener('suggestags.add', function(e) {
     console.info('Tag added:', e.detail);
@@ -459,7 +459,7 @@ You can set a limit on the number of tags.
 
 
 
-```
+```javascript
 jSuggestags._settings({     tagLimit: 5 }); jSuggestags._init();
 ```
 
@@ -473,7 +473,7 @@ For refreshing the values, you can use:
 
 
 
-```
+```javascript
 jSuggestags.refresh();
 ```
 
@@ -482,7 +482,7 @@ For destroying the instance, you can do:
 
 
 
-```
+```javascript
 jSuggestags.destroy();
 ```
 
@@ -499,7 +499,7 @@ Set to ```false``` to disable auto-selecting the suggested tag value when the mo
 
 
 
-```
+```javascript
 jSuggestags._settings({
     selectOnHover: false
 });
@@ -513,7 +513,7 @@ This will show a message when there is no suggested item matching the input.
 
 
 
-```
+```javascript
 jSuggestags._settings({
     noSuggestionMsg: 'Enter to generate new tag'
 });
@@ -528,7 +528,7 @@ By default, this is ```true```
 
 
 
-```
+```javascript
 jSuggestags._settings({
     showAllSuggestions: true
 });
@@ -543,7 +543,7 @@ By default, this is ```false```
 
 
 
-```
+```javascript
 jSuggestags._settings({
     keepLastOnHoverTag: false
 });
@@ -557,7 +557,7 @@ By default, input value and its tag names get printed in the console.
 You can set it to ```false``` to prevent this.
 
 
-```
+```javascript
 jSuggestags._settings({
     printValues: false
 });
@@ -571,7 +571,7 @@ This setting is for hiding proceeding tags when focus is out of the tags section
 By default, it is ```0```. You can set the number to hide the tags after the given number when focus is out.
 
 
-```
+```javascript
 jSuggestags._settings({
     showPlusAfter: 2
 });
@@ -585,7 +585,7 @@ A callback function can be passed to match the user-entered text with suggestion
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['India', 'Pakistan', 'Nepal', 'UAE', 'Iran', 'Bangladesh'],
     suggestMatch: function(suggestionItem, value) {
@@ -606,7 +606,7 @@ Instantiating
 You can initialize the plugin by creating an instance of  ```JSuggestags``` and passing a selector to it.
 
 
-```
+```javascript
 const jSuggestags = new JSuggestags('input[name="country"]');
 jSuggestags._init();
 ```
@@ -618,7 +618,7 @@ You need to set settings before initialization, and you can use all the setting 
 
 
 
-```
+```javascript
 jSuggestags._settings({
     suggestions: ['Black', 'White', 'Red', 'Blue', 'Green', 'Orange']
 });
@@ -631,7 +631,7 @@ jSuggestags._init();
 You can call these methods to add or remove a tag
 
 
-```
+```javascript
 jSuggestags.addTag('Purple');
 jSuggestags.removeTag('Red');
 ```
@@ -642,7 +642,7 @@ jSuggestags.removeTag('Red');
 You can call these methods to refresh or destroy the instance.
 
 
-```
+```javascript
 jSuggestags.refresh();
 jSuggestags.destroy();
 ```
@@ -652,7 +652,7 @@ jSuggestags.destroy();
 
 
 
-```
+```javascript
 document.querySelectorAll('.tags-input').forEach(function(element) {
     const jSuggestags = new JSuggestags(element);
     jSuggestags._init();
