@@ -25,24 +25,6 @@
 	display: inline-block;
 }
 
-.indexVideoBox .jstags-suggestags-area,
-.indexVideoBox .jstags-suggestags-input,
-.indexVideoBox .jstags-suggestags-input-area {
-	font-size: 100%;
-	margin: 0;
-	padding: 4px;
-	border: 0;
-	background-color: #303030;
-	color: #ccc;
-	word-wrap: break-word;
-	display: inline-block;
-	width: 100%;
-}
-
-.indexVideoBox .jstags-suggestags-area {
-	border: 1px inset #131313;
-}
-
 .jstags-suggestags-area .jstags-suggestags-input-area .jstags-suggestags-input:focus {
 	outline: 0;
 }
