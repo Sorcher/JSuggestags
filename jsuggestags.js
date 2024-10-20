@@ -48,12 +48,12 @@ class JSuggestags {
         this.name = null;
         this.defaultLabel = 'Enter tags';
         this.classes = {
-            sTagsArea: 'j-suggestags-suggestags-area',
-            inputArea: 'j-suggestags-suggestags-input-area',
-            inputAreaDef: 'j-suggestags-suggestags-input-area-default',
+            sTagsArea: 'j-suggestags-area',
+            inputArea: 'j-suggestags-input-area',
+            inputAreaDef: 'j-suggestags-input-area-default',
             focus: 'j-suggestags-focus',
-            sTagsInput: 'j-suggestags-suggestags-input',
-            listArea: 'j-suggestags-suggestags-list',
+            sTagsInput: 'j-suggestags-input',
+            listArea: 'j-suggestags-list',
             list: 'j-suggestags-list',
             listItem: 'j-suggestags-list-item',
             itemPad: 'j-suggestags-item-pad',
