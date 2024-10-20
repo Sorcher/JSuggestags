@@ -14,13 +14,7 @@ jSuggestags._init();
 Installation
 ------------
 
-Include the 
-```
-JSuggestags
-```
- script in your project:
-
-
+Include the ```JSuggestags``` script in your project:
 
 ```
 <script src="path/to/jsuggestags.js"></script>
@@ -29,12 +23,13 @@ JSuggestags
 
 Or, if using modules:
 
-
 ```
 import JSuggestags from 'path/to/jsuggestags.js';
 ```
 
-**Remember to export the class if using import**
+
+> [!NOTE]
+> Remember to export the class if using import.
 
 * * *
 
@@ -170,12 +165,7 @@ jSuggestags._init();
 ```
 
 
-The input will store 
-```
-value
-```
- separated by commas like this:
-
+The input will store ```value``` separated by commas like this:
 
 
 ```
@@ -504,7 +494,7 @@ More Settings
 
 ### selectOnHover
 
-By default, ``` selectOnHover ``` is ```true``` 
+By default ``` selectOnHover ``` is ```true``` 
 Set to ```false``` to disable auto-selecting the suggested tag value when the mouse hovers over a suggestion item.
 
 
@@ -533,11 +523,8 @@ jSuggestags._init();
 
 ### showAllSuggestions
 
-This will show all the suggestion items on input focus. By default, this is 
-```
-true
-```
-.
+This will show all the suggestion items on input focus.
+By default, this is ```true```
 
 
 
@@ -551,11 +538,8 @@ jSuggestags._init();
 
 ### keepLastOnHoverTag
 
-This will keep the last suggestion item in the input text field, even when moving away from the suggestion list. By default, this is 
-```
-false
-```
-.
+This will keep the last suggestion item in the input text field, even when moving away from the suggestion list.
+By default, this is ```false```
 
 
 
@@ -569,12 +553,8 @@ jSuggestags._init();
 
 ### printValues
 
-By default, input value and its tag names get printed in the console. You can set it to 
-```
-false
-```
- to prevent this.
-
+By default, input value and its tag names get printed in the console. 
+You can set it to ```false``` to prevent this.
 
 
 ```
@@ -587,12 +567,8 @@ jSuggestags._init();
 
 ### showPlusAfter
 
-This setting is for hiding proceeding tags when focus is out of the tags section and showing the **\+ number** instead. By default, it is 
-```
-0
-```
-. You can set the number to hide the tags after the given number when focus is out.
-
+This setting is for hiding proceeding tags when focus is out of the tags section and showing the **\+ number** instead. 
+By default, it is ```0```. You can set the number to hide the tags after the given number when focus is out.
 
 
 ```
@@ -627,12 +603,7 @@ This callback receives two parameters: the suggestion item value and the text va
 Instantiating
 -------------
 
-You can initialize the plugin by creating an instance of 
-```
-JSuggestags
-```
- and passing a selector to it.
-
+You can initialize the plugin by creating an instance of  ```JSuggestags``` and passing a selector to it.
 
 
 ```
@@ -657,12 +628,7 @@ jSuggestags._init();
 
 ### Add/Remove Tag
 
-You can call these methods to add or remove a tag with the instance of 
-```
-JSuggestags
-```
-.
-
+You can call these methods to add or remove a tag
 
 
 ```
@@ -674,7 +640,6 @@ jSuggestags.removeTag('Red');
 ### Refresh and Destroy
 
 You can call these methods to refresh or destroy the instance.
-
 
 
 ```
