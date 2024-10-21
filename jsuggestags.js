@@ -11,7 +11,9 @@ class JSuggestags {
             suggestions: [],
             suggestMatch: null,
             suggestionsAction: {
-                anyFirstCharForAjax:true,//true:always call with ajax | <char> i.ex: "@" to also check with Ajax request
+                // Input must start with "@" to use ajax call | '' to always use ajax
+                // >> (Its not passed to ajax as part of the string)
+                startWithRequire: '@',
                 timeout: -1,
                 minChars: 3,
                 minChange: -1,
@@ -321,6 +323,12 @@ class JSuggestags {
     }
 
     processAjaxSuggestion(value, keycode) {
+        // Add this condition at the start of the function
+        if (this.settings.suggestionsAction.startWithRequire && !value.startsWith(this.settings.suggestionsAction.startWithRequire)) {
+            return;
+        }
+
+
         let actionURL = this.getActionURL(this.settings.suggestionsAction.url);
         const params = {
             existingTags: this.tagNames,
@@ -401,13 +409,11 @@ class JSuggestags {
                     const minChars = this.settings.suggestionsAction.minChars;
                     const minChange = this.settings.suggestionsAction.minChange;
                     const lastSearch = this.selectors.sTagsInput.getAttribute('last-search');
-                    const anyFirstChar = value.startsWith(this.settings.suggestionsAction.anyFirstCharForAjax) || this.settings.suggestionsAction.anyFirstCharForAjax;
                     if (
                         value.length >= minChars &&
                         (minChange === -1 ||
                             !lastSearch ||
                             this.similarity(lastSearch, value) * 100 <= minChange)
-                        && anyFirstChar
                     ) {
                         this.selectors.sTagsInput.setAttribute('last-search', value);
                         this.ajaxActive = true;
