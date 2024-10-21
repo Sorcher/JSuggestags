@@ -116,7 +116,7 @@
 	font-weight: normal;
 }
 
-.j-suggestags-input-area .j-suggestags-select-tag,
+.j-suggestags-input-area .j-select-tag,
 .j-suggestags-input-area .j-plus-tag {
 	padding: 5px 7px;
 	margin: 0px 4px 4px 0px;
@@ -130,11 +130,11 @@
 	user-select: none;
 }
 
-.j-suggestags-select-tag {
+.j-select-tag {
 	font-family: fn-bold !important;
 }
 
-.j-suggestags-input-area .j-suggestags-select-tag.col-bg {
+.j-suggestags-input-area .j-select-tag.col-bg {
 	margin-top: 3px;
 	background: #000;
 	color: #007fff;
@@ -149,13 +149,13 @@
 	border-radius: 15px;
 }
 
-.j-suggestags-input-area .j-suggestags-select-tag:hover {
+.j-suggestags-input-area .j-select-tag:hover {
 	background: #000;
 	color: #6cb4ee;
 	cursor: pointer;
 }
 
-.js_cardTagsWrapper .j-suggestags-select-tag.col-bg {
+.js_cardTagsWrapper .j-select-tag.col-bg {
 	background: rgba(0, 0, 0, 0.25);
 	border: 1px solid transparent;
 	-webkit-border-radius: 0.175rem;
@@ -164,12 +164,12 @@
 	line-height: 0.9em;
 }
 
-.js_cardTagsWrapper .j-suggestags-select-tag.col-bg:hover {
+.js_cardTagsWrapper .j-select-tag.col-bg:hover {
 	background: rgba(0, 0, 0, 0.75);
 	border: 1px solid #000;
 }
 
-.j-suggestags-input-area .flash.j-suggestags-select-tag {
+.j-suggestags-input-area .flash.j-select-tag {
 	background-color: #444;
 	-webkit-transition: background-color 200ms linear;
 	-ms-transition: background-color 200ms linear;
