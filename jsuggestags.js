@@ -11,6 +11,7 @@ class JSuggestags {
             suggestions: [],
             suggestMatch: null,
             suggestionsAction: {
+                anyFirstCharForAjax:true,//true:always call with ajax | <char> i.ex: "@" to also check with Ajax request
                 timeout: -1,
                 minChars: 3,
                 minChange: -1,
@@ -400,11 +401,13 @@ class JSuggestags {
                     const minChars = this.settings.suggestionsAction.minChars;
                     const minChange = this.settings.suggestionsAction.minChange;
                     const lastSearch = this.selectors.sTagsInput.getAttribute('last-search');
+                    const anyFirstChar = value.startsWith(this.settings.suggestionsAction.anyFirstCharForAjax) || this.settings.suggestionsAction.anyFirstCharForAjax;
                     if (
                         value.length >= minChars &&
                         (minChange === -1 ||
                             !lastSearch ||
                             this.similarity(lastSearch, value) * 100 <= minChange)
+                        && anyFirstChar
                     ) {
                         this.selectors.sTagsInput.setAttribute('last-search', value);
                         this.ajaxActive = true;
