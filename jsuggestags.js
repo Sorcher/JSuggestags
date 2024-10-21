@@ -90,10 +90,16 @@ class JSuggestags {
     }
 
     _settings(settings) {
+        if (settings.hasOwnProperty('suggestionsAction')){
+            this.settings.suggestionsAction = { ...this.settings.suggestionsAction, ...settings.suggestionsAction};
+            delete settings['suggestionsAction'];
+        }
         this.settings = {
             ...this.settings,
             ...settings
         };
+
+        console.warn(this.settings)
     }
 
     _setMethod(method) {
@@ -324,6 +330,7 @@ class JSuggestags {
 
     processAjaxSuggestion(value, keycode) {
         // Add this condition at the start of the function
+        let post_value = value;
         if (this.settings.suggestionsAction.startWithRequire && !value.startsWith(this.settings.suggestionsAction.startWithRequire)) {
             return;
         }
@@ -333,7 +340,7 @@ class JSuggestags {
         const params = {
             existingTags: this.tagNames,
             existing: this.settings.suggestions,
-            term: value,
+            term: post_value,
         };
 
         let ajaxParams = {
@@ -448,6 +455,10 @@ class JSuggestags {
     }
 
     suggestWhiteList(value, keycode, showAll = false) {
+        if (this.settings.suggestionsAction.startWithRequire && value.startsWith(this.settings.suggestionsAction.startWithRequire)) {
+            value = value.slice(1)
+        }
+
         let found = false;
         const lower = value.toString().toLowerCase();
         const listItems = this.selectors.listArea.querySelectorAll(`.${this.classes.listItem}`);
@@ -526,6 +537,7 @@ class JSuggestags {
         this.settings.suggestions.forEach((item) => {
             let value = '';
             let tag = '';
+            let isUser = 0;
             if (typeof item === 'object') {
                 value = item.value;
                 tag = item.tag;
@@ -533,7 +545,12 @@ class JSuggestags {
                 value = item;
                 tag = item;
             }
-            listHTML += `<li class="${this.classes.listItem}" data-val="${value}">${tag}</li>`;
+            if (this.settings.suggestionsAction.startWithRequire && value.startsWith(this.settings.suggestionsAction.startWithRequire)) {
+                isUser = tag.split('-')[1];
+                isUser = isUser ?? 0;//uid
+                value = value.slice(1)
+            }
+            listHTML += `<li class="${this.classes.listItem}" data-isuser="${isUser}" data-val="${value}">${tag}</li>`;
         });
         if (this.settings.noSuggestionMsg) {
             listHTML += `<li class="${this.classes.noSuggestion}">${this.settings.noSuggestionMsg}</li>`;
