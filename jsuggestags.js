@@ -12,7 +12,7 @@ class JSuggestags {
             suggestMatch: null,
             suggestionsAction: {
                 timeout: -1,
-                minChars: 0,
+                minChars: 3,
                 minChange: -1,
                 delay: 100,
                 type: 'GET',
@@ -46,24 +46,24 @@ class JSuggestags {
         };
         this.method = undefined;
         this.name = null;
-        this.defaultLabel = 'Enter tags';
+        this.defaultLabel = 'Opprett tag';
         this.classes = {
             sTagsArea: 'j-suggestags-area',
             inputArea: 'j-suggestags-input-area',
             inputAreaDef: 'j-suggestags-input-area-default',
-            focus: 'j-suggestags-focus',
+            focus: 'j-focus',
             sTagsInput: 'j-suggestags-input',
             listArea: 'j-suggestags-list',
-            list: 'j-suggestags-list',
-            listItem: 'j-suggestags-list-item',
-            itemPad: 'j-suggestags-item-pad',
-            inputType: 'j-suggestags-select-input',
-            tagItem: 'j-suggestags-select-tag',
-            plusItem: 'j-suggestags-plus-tag',
+            list: 'j-list',
+            listItem: 'j-list-item',
+            itemPad: 'j-item-pad',
+            inputType: 'j-select-input',
+            tagItem: 'j-select-tag',
+            plusItem: 'j-plus-tag',
             colBg: 'col-bg',
-            removeTag: 'j-suggestags-remove-tag',
+            removeTag: 'j-remove-tag',
             readyToRemove: 'ready-to-remove',
-            noSuggestion: 'j-suggestags-no-suggestion',
+            noSuggestion: 'j-no-suggestion',
             showPlusBg: 'show-plus-bg',
         };
         this.selectors = {
@@ -320,15 +320,14 @@ class JSuggestags {
     }
 
     processAjaxSuggestion(value, keycode) {
-        const actionURL = this.getActionURL(this.settings.suggestionsAction.url);
+        let actionURL = this.getActionURL(this.settings.suggestionsAction.url);
         const params = {
             existingTags: this.tagNames,
             existing: this.settings.suggestions,
             term: value,
         };
 
-        const ajaxConfig = this.settings.suggestionsAction.callbacks || {};
-        const ajaxParams = {
+        let ajaxParams = {
             method: this.settings.suggestionsAction.type || 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -336,21 +335,32 @@ class JSuggestags {
         };
 
         if (this.settings.suggestionsAction.type === 'GET') {
-            actionURL += `?${new URLSearchParams(params).toString()}`;
+            const urlParams = new URLSearchParams(params);
+            actionURL += `?${urlParams.toString()}`;
         } else {
             ajaxParams.body = JSON.stringify(params);
-        }
-
-        if (this.settings.suggestionsAction.timeout !== -1) {
-            ajaxParams.timeout = this.settings.suggestionsAction.timeout * 1000;
         }
 
         if (typeof this.settings.suggestionsAction.beforeSend === 'function') {
             this.settings.suggestionsAction.beforeSend();
         }
 
+        // Implement timeout using AbortController
+        const controller = new AbortController();
+        const signal = controller.signal;
+        ajaxParams.signal = signal;
+
+        if (this.settings.suggestionsAction.timeout && this.settings.suggestionsAction.timeout !== -1) {
+            setTimeout(() => controller.abort(), this.settings.suggestionsAction.timeout);
+        }
+
         fetch(actionURL, ajaxParams)
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok (${response.statusText})`);
+                }
+                return response.json();
+            })
             .then((data) => {
                 if (data && data.suggestions) {
                     this.settings.suggestions = [...this.settings.suggestions, ...data.suggestions];
@@ -364,6 +374,9 @@ class JSuggestags {
                 }
             })
             .catch((error) => {
+                if (error.name === 'AbortError') {
+                    console.warn('Fetch aborted due to timeout');
+                }
                 if (typeof this.settings.suggestionsAction.error === 'function') {
                     this.settings.suggestionsAction.error(error);
                 }
